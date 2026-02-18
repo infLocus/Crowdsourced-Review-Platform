@@ -2,7 +2,6 @@
   overflow-x: hidden;
 }
 
-/* Hero Section */
 .hero {
   position: relative;
   min-height: 80vh;
@@ -127,7 +126,6 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Categories Section */
 .categories-section {
   padding: var(--spacing-xxl) 0;
   background: white;
@@ -184,7 +182,6 @@
   color: var(--color-text-secondary);
 }
 
-/* Featured Section */
 .featured-section {
   padding: var(--spacing-xxl) 0;
   background: var(--color-background);
@@ -308,7 +305,6 @@
   color: var(--color-text-secondary);
 }
 
-/* CTA Section */
 .cta-section {
   padding: var(--spacing-xxl) 0;
   background: linear-gradient(135deg, var(--color-primary), #1a1a2e);
@@ -347,7 +343,6 @@
   color: var(--color-text);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .categories-grid {
     grid-template-columns: repeat(3, 1fr);

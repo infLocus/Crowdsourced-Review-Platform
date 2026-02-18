@@ -109,7 +109,7 @@ const Businesses = () => {
         </div>
 
         <div className="businesses-layout">
-          {/* Sidebar Filters */}
+
           <aside className="filters-sidebar">
             <div className="filters-card">
               <div className="filters-header">
@@ -185,7 +185,7 @@ const Businesses = () => {
             </div>
           </aside>
 
-          {/* Main Content */}
+
           <main className="businesses-main">
             {loading ? (
               <div className="loading-container">
@@ -240,7 +240,7 @@ const Businesses = () => {
                   ))}
                 </div>
 
-                {/* Pagination */}
+
                 {pagination && pagination.pages > 1 && (
                   <div className="pagination">
                     <button

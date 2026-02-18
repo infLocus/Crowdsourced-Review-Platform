@@ -16,7 +16,6 @@ const BusinessDetail = () => {
   const [loading, setLoading] = useState(true);
   const [showReviewForm, setShowReviewForm] = useState(false);
   
-  // Review form state
   const [reviewForm, setReviewForm] = useState({
     rating: 5,
     quality: 5,
@@ -127,7 +126,7 @@ const BusinessDetail = () => {
 
   return (
     <div className="business-detail-page">
-      {/* Hero Section */}
+
       <div className="business-hero">
         <div className="business-hero-bg">
           {business.images && business.images.length > 0 ? (
@@ -170,7 +169,7 @@ const BusinessDetail = () => {
               </p>
             </section>
 
-            {/* Rating Breakdown */}
+
             {ratingStats && ratingStats.count > 0 && (
               <section className="detail-section">
                 <h2>Rating Breakdown</h2>
@@ -216,7 +215,7 @@ const BusinessDetail = () => {
               </section>
             )}
 
-            {/* Reviews Section */}
+
             <section className="detail-section">
               <div className="section-header">
                 <h2>Reviews</h2>
@@ -230,7 +229,7 @@ const BusinessDetail = () => {
                 )}
               </div>
 
-              {/* Review Form */}
+
               {showReviewForm && (
                 <div className="review-form-card">
                   <h3>Write a Review</h3>
@@ -358,7 +357,7 @@ const BusinessDetail = () => {
                 </div>
               )}
 
-              {/* Reviews List */}
+
               {reviews.length > 0 ? (
                 <div className="reviews-list">
                   {reviews.map((review) => (
@@ -407,7 +406,7 @@ const BusinessDetail = () => {
             </section>
           </div>
 
-          {/* Sidebar */}
+
           <aside className="business-sidebar">
             <div className="sidebar-card">
               <h3>Contact Information</h3>
