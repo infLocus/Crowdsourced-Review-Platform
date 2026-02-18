@@ -11,6 +11,8 @@ router.use(protect, admin);
 // @route   GET /api/admin/dashboard
 // @desc    Get admin dashboard stats
 // @access  Admin
+router.use(protect, admin);
+
 router.get('/dashboard', async (req, res) => {
   try {
     const [

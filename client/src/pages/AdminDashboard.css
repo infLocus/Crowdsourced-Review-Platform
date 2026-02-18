@@ -1,0 +1,283 @@
+.admin-dashboard {
+  padding: var(--spacing-xl) 0;
+}
+
+.admin-dashboard .dashboard-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.admin-dashboard .dashboard-header h1 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.admin-dashboard .dashboard-header p {
+  color: var(--color-text-secondary);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Tabs */
+.admin-tabs {
+  display: flex;
+  gap: var(--spacing-md);
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: var(--spacing-xl);
+  overflow-x: auto;
+}
+
+/* Section Grid */
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+}
+
+.section-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.recent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.recent-item:last-child {
+  border-bottom: none;
+}
+
+.recent-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-title {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.recent-meta {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.empty-text {
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: var(--spacing-lg);
+}
+
+/* Pending Reviews */
+.reviews-pending-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.pending-review-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.pending-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pending-review-card .reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.pending-review-card .reviewer-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
+
+.pending-review-card .reviewer-name {
+  display: block;
+  font-weight: 600;
+}
+
+.pending-review-card .review-email {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.pending-review-card .review-business-info {
+  text-align: right;
+}
+
+.pending-review-card .review-business-info a {
+  display: block;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.pending-review-card .business-location {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.pending-review-content {
+  margin-bottom: var(--spacing-lg);
+}
+
+.review-rating-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.rating-label {
+  font-weight: 600;
+}
+
+.rating-value {
+  color: var(--color-text-secondary);
+}
+
+.pending-review-card .review-title {
+  margin-bottom: var(--spacing-sm);
+}
+
+.pending-review-card .review-text {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.pending-review-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Table Styles */
+.table-container {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.table th {
+  background: var(--color-background);
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.business-link {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.business-link:hover {
+  color: var(--color-secondary);
+}
+
+.table .business-location {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.rating-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.status-badges {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.action-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.text-error {
+  color: var(--color-error) !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .section-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pending-review-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .pending-review-card .review-business-info {
+    text-align: left;
+  }
+  
+  .pending-review-actions {
+    flex-direction: column;
+  }
+  
+  .pending-review-actions .btn {
+    width: 100%;
+  }
+}
+
