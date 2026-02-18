@@ -4,9 +4,7 @@ const Business = require('../models/Business');
 const Review = require('../models/Review');
 const { protect } = require('../middleware/auth');
 
-// @route   GET /api/businesses
-// @desc    Get all businesses with filters
-// @access  Public
+
 router.get('/', async (req, res) => {
   try {
     const {
@@ -19,7 +17,6 @@ router.get('/', async (req, res) => {
       limit = 12
     } = req.query;
 
-    // Build query
     let query = { isActive: true };
 
     if (category) {
@@ -42,7 +39,6 @@ router.get('/', async (req, res) => {
       ];
     }
 
-    // Sort options
     let sortOption = { createdAt: -1 };
     if (sort === 'rating') {
       sortOption = { averageRating: -1 };
@@ -50,7 +46,6 @@ router.get('/', async (req, res) => {
       sortOption = { name: 1 };
     }
 
-    // Pagination
     const pageNum = parseInt(page);
     const limitNum = parseInt(limit);
     const skip = (pageNum - 1) * limitNum;
@@ -82,9 +77,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// @route   GET /api/businesses/featured
-// @desc    Get featured businesses
-// @access  Public
+
 router.get('/featured', async (req, res) => {
   try {
     const businesses = await Business.find({ isActive: true, isVerified: true })
@@ -105,9 +98,7 @@ router.get('/featured', async (req, res) => {
   }
 });
 
-// @route   GET /api/businesses/categories
-// @desc    Get all categories with counts
-// @access  Public
+
 router.get('/categories', async (req, res) => {
   try {
     const categories = await Business.aggregate([
@@ -147,9 +138,7 @@ router.get('/categories', async (req, res) => {
   }
 });
 
-// @route   GET /api/businesses/:id
-// @desc    Get single business
-// @access  Public
+
 router.get('/:id', async (req, res) => {
   try {
     const business = await Business.findById(req.params.id)
@@ -162,7 +151,6 @@ router.get('/:id', async (req, res) => {
       });
     }
 
-    // Get recent approved reviews
     const reviews = await Review.find({
       business: business._id,
       status: 'approved'
@@ -171,7 +159,6 @@ router.get('/:id', async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(5);
 
-    // Calculate rating breakdown
     const ratingStats = await Review.aggregate([
       {
         $match: {
@@ -212,9 +199,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// @route   POST /api/businesses
-// @desc    Create a business
-// @access  Private
+
 router.post('/', protect, async (req, res) => {
   try {
     const businessData = {
@@ -237,9 +222,7 @@ router.post('/', protect, async (req, res) => {
   }
 });
 
-// @route   PUT /api/businesses/:id
-// @desc    Update a business
-// @access  Private (owner or admin)
+
 router.put('/:id', protect, async (req, res) => {
   try {
     let business = await Business.findById(req.params.id);
@@ -251,7 +234,6 @@ router.put('/:id', protect, async (req, res) => {
       });
     }
 
-    // Check ownership or admin
     if (business.owner.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
@@ -278,9 +260,7 @@ router.put('/:id', protect, async (req, res) => {
   }
 });
 
-// @route   DELETE /api/businesses/:id
-// @desc    Delete a business
-// @access  Private (owner or admin)
+
 router.delete('/:id', protect, async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
@@ -292,7 +272,6 @@ router.delete('/:id', protect, async (req, res) => {
       });
     }
 
-    // Check ownership or admin
     if (business.owner.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
@@ -300,7 +279,6 @@ router.delete('/:id', protect, async (req, res) => {
       });
     }
 
-    // Delete all reviews for this business
     await Review.deleteMany({ business: business._id });
 
     await business.deleteOne();
