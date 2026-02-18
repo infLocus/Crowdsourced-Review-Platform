@@ -24,7 +24,7 @@ function App() {
             <Route path="/businesses" element={<Businesses />} />
             <Route path="/businesses/:id" element={<BusinessDetail />} />
             
-            {/* Protected Routes */}
+
             <Route 
               path="/add-business" 
               element={
@@ -42,7 +42,6 @@ function App() {
               } 
             />
             
-            {/* Admin Routes */}
             <Route 
               path="/admin" 
               element={
