@@ -76,6 +76,7 @@ const businessSchema = new mongoose.Schema({
   timestamps: true
 });
 
+// Index for searching
 businessSchema.index({ name: 'text', city: 'text', description: 'text' });
 businessSchema.index({ category: 1 });
 businessSchema.index({ city: 1, state: 1 });
