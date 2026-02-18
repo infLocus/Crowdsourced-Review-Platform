@@ -5,6 +5,12 @@ const Business = require('../models/Business');
 const Review = require('../models/Review');
 const { protect, admin } = require('../middleware/auth');
 
+// Apply admin middleware to all routes
+router.use(protect, admin);
+
+// @route   GET /api/admin/dashboard
+// @desc    Get admin dashboard stats
+// @access  Admin
 router.use(protect, admin);
 
 router.get('/dashboard', async (req, res) => {
@@ -25,12 +31,14 @@ router.get('/dashboard', async (req, res) => {
       Review.countDocuments({ status: 'rejected' })
     ]);
 
+    // Get recent reviews
     const recentReviews = await Review.find()
       .populate('user', 'username avatar')
       .populate('business', 'name')
       .sort({ createdAt: -1 })
       .limit(5);
 
+    // Get recent businesses
     const recentBusinesses = await Business.find()
       .populate('owner', 'username')
       .sort({ createdAt: -1 })
@@ -58,7 +66,9 @@ router.get('/dashboard', async (req, res) => {
   }
 });
 
-
+// @route   GET /api/admin/reviews/pending
+// @desc    Get pending reviews
+// @access  Admin
 router.get('/reviews/pending', async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
@@ -94,7 +104,9 @@ router.get('/reviews/pending', async (req, res) => {
   }
 });
 
-
+// @route   PUT /api/admin/reviews/:id/approve
+// @desc    Approve a review
+// @access  Admin
 router.put('/reviews/:id/approve', async (req, res) => {
   try {
     const review = await Review.findById(req.params.id);
@@ -129,7 +141,9 @@ router.put('/reviews/:id/approve', async (req, res) => {
   }
 });
 
-
+// @route   PUT /api/admin/reviews/:id/reject
+// @desc    Reject a review
+// @access  Admin
 router.put('/reviews/:id/reject', async (req, res) => {
   try {
     const { reason } = req.body;
@@ -164,7 +178,9 @@ router.put('/reviews/:id/reject', async (req, res) => {
   }
 });
 
-
+// @route   GET /api/admin/businesses
+// @desc    Get all businesses (including inactive)
+// @access  Admin
 router.get('/businesses', async (req, res) => {
   try {
     const { page = 1, limit = 10, verified } = req.query;
@@ -204,7 +220,9 @@ router.get('/businesses', async (req, res) => {
   }
 });
 
-
+// @route   PUT /api/admin/businesses/:id/verify
+// @desc    Verify/unverify a business
+// @access  Admin
 router.put('/businesses/:id/verify', async (req, res) => {
   try {
     const { isVerified } = req.body;
@@ -236,7 +254,9 @@ router.put('/businesses/:id/verify', async (req, res) => {
   }
 });
 
-
+// @route   PUT /api/admin/businesses/:id/activate
+// @desc    Activate/deactivate a business
+// @access  Admin
 router.put('/businesses/:id/activate', async (req, res) => {
   try {
     const { isActive } = req.body;
@@ -268,7 +288,9 @@ router.put('/businesses/:id/activate', async (req, res) => {
   }
 });
 
-
+// @route   DELETE /api/admin/businesses/:id
+// @desc    Delete a business (admin only)
+// @access  Admin
 router.delete('/businesses/:id', async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
@@ -298,7 +320,9 @@ router.delete('/businesses/:id', async (req, res) => {
   }
 });
 
-
+// @route   GET /api/admin/users
+// @desc    Get all users
+// @access  Admin
 router.get('/users', async (req, res) => {
   try {
     const { page = 1, limit = 10, role } = req.query;
@@ -338,7 +362,9 @@ router.get('/users', async (req, res) => {
   }
 });
 
-
+// @route   PUT /api/admin/users/:id/role
+// @desc    Update user role
+// @access  Admin
 router.put('/users/:id/role', async (req, res) => {
   try {
     const { role } = req.body;

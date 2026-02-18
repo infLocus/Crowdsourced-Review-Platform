@@ -3,11 +3,14 @@ const router = express.Router();
 const User = require('../models/User');
 const { protect, generateToken } = require('../middleware/auth');
 
-
+// @route   POST /api/auth/register
+// @desc    Register a new user
+// @access  Public
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
+    // Check if user already exists
     const existingUser = await User.findOne({
       $or: [{ email }, { username }]
     });
@@ -21,6 +24,7 @@ router.post('/register', async (req, res) => {
       });
     }
 
+    // Create new user
     const user = await User.create({
       username,
       email,
@@ -50,10 +54,14 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// @route   POST /api/auth/login
+// @desc    Login user
+// @access  Public
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Validate input
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -61,6 +69,7 @@ router.post('/login', async (req, res) => {
       });
     }
 
+    // Find user and include password
     const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
@@ -70,6 +79,7 @@ router.post('/login', async (req, res) => {
       });
     }
 
+    // Check password
     const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {
@@ -101,7 +111,9 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
+// @route   GET /api/auth/me
+// @desc    Get current user
+// @access  Private
 router.get('/me', protect, async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -127,11 +139,14 @@ router.get('/me', protect, async (req, res) => {
   }
 });
 
-
+// @route   PUT /api/auth/profile
+// @desc    Update user profile
+// @access  Private
 router.put('/profile', protect, async (req, res) => {
   try {
     const { username, email, bio, avatar } = req.body;
 
+    // Check if email or username is already taken by another user
     if (email || username) {
       const existingUser = await User.findOne({
         $and: [
@@ -193,7 +208,9 @@ router.put('/profile', protect, async (req, res) => {
   }
 });
 
-
+// @route   PUT /api/auth/password
+// @desc    Update password
+// @access  Private
 router.put('/password', protect, async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -228,4 +245,5 @@ router.put('/password', protect, async (req, res) => {
 });
 
 module.exports = router;
+
 
